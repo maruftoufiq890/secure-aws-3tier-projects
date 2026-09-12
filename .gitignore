@@ -1,0 +1,25 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# AWS credentials
+.aws/
+credentials
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
