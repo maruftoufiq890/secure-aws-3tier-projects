@@ -58,9 +58,9 @@ Route tables control how network traffic is routed inside the VPC.
 ### Database Route Table
 No internet route.
 
-![Private Route Table](../private_rt/.png)
-![Public Route Table](../public_rt/.png)
-![Database Route Table](../db_rt/.png)
+![Private Route Table](../Screenshots/private_rt/.png)
+![Public Route Table](../Screenshots/public_rt/.png)
+![Database Route Table](../screenshots/db_rt/.png)
 
 
 ## Security Design
@@ -73,8 +73,6 @@ This project uses separate Security Groups for different application layers.
 ### ALB Security Group
 The Application Load Balancer is internet-facing, so HTTP/HTTPS traffic is allowed from the internet.
 
-
-![Database Route Table](../db_rt/.png)
 
 ### Application Security Group
 
