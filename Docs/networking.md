@@ -60,7 +60,7 @@ No internet route.
 
 ![Private Route Table](../Screenshots/private_rt/.png)
 ![Public Route Table](../Screenshots/public_rt/.png)
-![Database Route Table](../screenshots/db_rt/.png)
+![Database Route Table](../Screenshots/db_rt/.png)
 
 
 ## Security Design
@@ -74,8 +74,42 @@ This project uses separate Security Groups for different application layers.
 The Application Load Balancer is internet-facing, so HTTP/HTTPS traffic is allowed from the internet.
 
 
+## Security Groups
+
+### ALB Security Group
+- Name: `alb-sg`
+- Inbound: HTTP 80 from `0.0.0.0/0`
+- Inbound: HTTPS 443 from `0.0.0.0/0`
+- Purpose: Allow public web traffic to the Application Load Balancer.
+
+![ALB Security Group](../Screenshots/alb-sg.png)
+
 ### Application Security Group
+- Name: `app-sg`
+- Inbound: HTTP 80 from `alb-sg`
+- Purpose: Allow application traffic only from the ALB.
 
-The application EC2 instances are private and should not accept direct internet traffic.
+![Application Security Group](../Screenshots/app-sg.png)
 
-Only the ALB Security Group is allowed to communicate with the application servers.
+### Database Security Group
+- Name: `db-sg`
+- Inbound: PostgreSQL 5432 from `app-sg`
+- Purpose: Allow database access only from application servers.
+
+![Database Security Group](../Screenshots/db-sg.png)
+
+### Security Flow
+
+Internet
+↓
+`alb-sg`
+↓
+ALB
+↓
+`app-sg`
+↓
+EC2 Application Servers
+↓
+`db-sg`
+↓
+RDS PostgreSQL
